@@ -7,8 +7,8 @@ Machine Learning for detection vegetables and fruit and detection diseas leaf on
 
 ## Contributing
 Team Machine Learning on Tanam.in :
-- Dwiweka Naratama [https://www.linkedin.com/in/dwiwekanaratama/]
-- Dean Sitorus [https://www.linkedin.com/in/sj-dean-veza-sitorus-243743212/]
+- (Dwiweka Naratama)[https://www.linkedin.com/in/dwiwekanaratama/]
+- (Dean Sitorus)[https://www.linkedin.com/in/sj-dean-veza-sitorus-243743212/]
 
 
 
