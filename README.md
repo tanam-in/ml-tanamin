@@ -54,6 +54,8 @@ Here is accuracy on vegetable detection we use
 
 ![akurasi](https://user-images.githubusercontent.com/80300827/173003239-230a8328-8173-4ed5-a24e-ca53bdb64839.png)
 
+
+
 Result predict on image
 
 ![Kol](https://user-images.githubusercontent.com/80300827/173003476-f3e55548-eca8-491a-88ee-42cacbb95689.png)
