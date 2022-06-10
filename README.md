@@ -52,10 +52,11 @@ We use transfer learning method [Xception](https://www.tensorflow.org/api_docs/p
 
 Here is accuracy on vegetable detection we use
 
-![alt text](https://ibb.co/HXrwf5K)
+![akurasi](https://user-images.githubusercontent.com/80300827/173003239-230a8328-8173-4ed5-a24e-ca53bdb64839.png)
 
 Result predict on image
 
-![alt text](https://ibb.co/TrMsFSQ)
+![Kol](https://user-images.githubusercontent.com/80300827/173003476-f3e55548-eca8-491a-88ee-42cacbb95689.png)
 
-![alt text](https://ibb.co/1JrxRcg)
+![Tomato](https://user-images.githubusercontent.com/80300827/173003549-d16fb96d-01cf-4d02-926d-8ad108fa161a.png)
+
