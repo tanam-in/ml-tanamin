@@ -54,8 +54,16 @@ Here is accuracy on vegetable detection we use
 
 ![Alt text](https://ibb.co/HXrwf5K)
 
+<p align="center">
+  <img src="[your_relative_path_here](https://ibb.co/HXrwf5K)" width="350" title="Accuracy">
+</p>
+
 Result predict on image
 
-![Alt text](https://ibb.co/TrMsFSQ)
+<p align="center">
+  <img src="https://ibb.co/TrMsFSQ" width="350" title="First Image">
+</p>
 
-![Alt text](https://ibb.co/1JrxRcg)
+<p align="center">
+  <img src="https://ibb.co/1JrxRcg" width="350" title="Second Image">
+</p>
