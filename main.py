@@ -1,51 +1,57 @@
-import requests
-import pickle
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
 from google.cloud import storage
+import tensorflow as tf
+from PIL import Image
 import numpy as np
-import json
 
-# ini aku gatau gimana cara dapetin datanya nanti
-# download path model here : https://drive.google.com/file/d/1fv66TZQZGOWYeky2Lr3DnLu596ARvY_x/view?usp=sharing
-# rubah atau tambahin bagian requestnya data dan lainnya (kurang mengerti)
+BUCKET_NAME = "tanamin_model"
+category=["Bean", 
+"Bitter_Gourd", "Broccoli", "Cabbage", "Capsicum", "Carrot", "Cauliflower", "Cucumber", "Papaya", "Potato", "Pumpkin", "Tomato"]
 
+model = None
 
-path_to_model='./model_Xception_13Classes.h5' # Path model tempat simpan model
-model = load_model(path_to_model) # Load Model
-file = './browkoli.jpg' # Lokasi file yang akan dideteksi
+def download_blob(bucket_name, source_blob_name, destination_file_name):
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(source_blob_name)
+    blob.download_to_filename(destination_file_name)
 
-category={
-    0: 'Bean', 
-    1: 'Bitter_Gourd', 
-    2: "Broccoli", 
-    3: 'Cabbage', 
-    4: 'Capsicum', 
-    5: 'Carrot', 
-    6: 'Cauliflower',
-    7: 'Cucumber', 
-    8: 'Papaya', 
-    9: 'Potato', 
-    10: 'Pumpkin', 
-    11: "Tomato"
-}
+def deteksi(request):
+    global model
+    if model is None:
+        download_blob(
+            BUCKET_NAME,
+            "models/model_Xception_13Classes.h5",
+            "/tmp/model_Xception_13Classes.h5",
+        )
+        model = tf.keras.models.load_model("/tmp/model_Xception_13Classes.h5") #load model
 
-def predict_image(filename,model):
-    img_ = image.load_img(filename, target_size=(224, 224))
-    img_array = image.img_to_array(img_)
-    img_processed = np.expand_dims(img_array, axis=0) 
-    img_processed /= 255.   
+    image = request.files["file"]
+
+    image = np.array(
+        Image.open(image).convert("RGB").resize((224, 224)) 
+    )
+
+    image = image/255 
     
-    prediction = model.predict(img_processed)
-    index = np.argmax(prediction)
+    img_array = tf.expand_dims(image, 0)
+    predictions = model.predict(img_array)
+
+    # New Update here
+    counter = 0
+    for values in predictions:
+        for value in values:
+            if value > 0.90:
+                counter = 1
     
-    name_class = category[index]
+    if counter == 1:
+        index = category.index(predicted_category)
+        predicted_category = category[np.argmax(predictions[0])]
+        accuracy = predictions[0][index]
 
-    value = {
-        'id' : int(index),
-        'name' : name_class
-    }
+        return {"id": index, "name": predicted_category, "accuracy" : accuracy}
+    else:
+        return None
 
-    return json.dumps(value)
+    
 
-predict_image(file,model)
+
